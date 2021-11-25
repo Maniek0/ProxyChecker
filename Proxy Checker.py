@@ -4,6 +4,8 @@ from tkinter.ttk import Separator
 import requests
 import threading
 from time import sleep
+
+from requests.sessions import Request
 class Interface(threading.Thread):
     def __init__(self,threadID,name,counter):
         threading.Thread.__init__(self)
