@@ -3,7 +3,7 @@ from tkinter import filedialog,messagebox
 from tkinter.ttk import Separator
 import requests
 import threading
-from time import sleep
+import time
 class Interface(threading.Thread):
     def __init__(self,threadID,name,counter):
         threading.Thread.__init__(self)
@@ -97,15 +97,13 @@ class Check(threading.Thread):
         i = x = 0
         l2.config(text=i)
         l4.config(text=x)
-        from time import sleep
         for line in proxy_:
             try:
                 proxies = {
                     'http': 'http://'+str(line),
                     'https': 'https://'+str(line)
                 }
-                w = requests
-                s = w.get('http://example.com',headers=headers,proxies=proxies,timeout=5,verify=False,allow_redirects=False)
+                s = requests.get('http://example.com',headers=headers,proxies=proxies,timeout=5,verify=False,allow_redirects=False)
                 s.close()
                 i+=1
                 l2.config(text=i)
@@ -113,7 +111,7 @@ class Check(threading.Thread):
             except (requests.exceptions.ProxyError, requests.exceptions.ConnectTimeout, requests.exceptions.SSLError,requests.exceptions.ReadTimeout,requests.exceptions.ConnectionError):
                 x+=1
                 l4.config(text=x)
-            sleep(1)
+            time.sleep(1)
         if goods != []:
             global goodProxy
             goodProxy = goods
