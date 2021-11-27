@@ -92,7 +92,11 @@ class Check(threading.Thread):
         goods = []
         proxy_ = proxy
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36'
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Language': 'pl',
+            'accept-charset': 'utf-8',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36',
+            'Referer': 'https://onet.pl'
         }
         i = x = 0
         l2.config(text=i)
@@ -103,7 +107,7 @@ class Check(threading.Thread):
                     'http': 'http://'+str(line),
                     'https': 'https://'+str(line)
                 }
-                s = requests.get('http://example.com',headers=headers,proxies=proxies,timeout=5,verify=False,allow_redirects=False)
+                s = requests.get('http://onet.pl',headers=headers,proxies=proxies,timeout=5,verify=False,allow_redirects=False)
                 s.close()
                 i+=1
                 l2.config(text=i)
