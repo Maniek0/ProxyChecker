@@ -66,7 +66,7 @@ class Proxies:
         global proxy
         filename = filedialog.askopenfilename(title="Wybierz proxy",filetypes=(("Pliki tekstowe","*.txt"),("Wszystkie pliki","*.*")) )
         if filename != "":
-            file = open(filename)
+            file = open(filename,encoding='utf-8')
             data = file.read()
             file.close()
             proxy = data.split('\n')
