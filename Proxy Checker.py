@@ -26,12 +26,12 @@ class Interface(threading.Thread):
         def openProxy():
             Proxies().openProxy()
             if len(proxy) >=1:
-                messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
                 proxyList.config(state=NORMAL)
                 proxyList.delete(0,END)
                 for line in proxy:
                     proxyList.insert(END,str(line))
                 proxyList.config(state=DISABLED)
+                messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
         proxyOpenButton = Button(buttons,width=15,height=2,text='Wczytaj proxy',command=openProxy)
         proxyOpenButton.pack()
         def startCheck():
@@ -114,7 +114,7 @@ class Check(threading.Thread):
                 i+=1
                 l2.config(text=i)
                 goods.append(line)
-            except (requests.exceptions.ProxyError, requests.exceptions.ConnectTimeout, requests.exceptions.SSLError,requests.exceptions.ReadTimeout,requests.exceptions.ConnectionError):
+            except (requests.exceptions.ProxyError, requests.exceptions.ConnectTimeout, requests.exceptions.SSLError,requests.exceptions.ReadTimeout,requests.exceptions.ConnectionError,requests.exceptions.InvalidProxyURL):
                 x+=1
                 l4.config(text=x)
             time.sleep(1)
