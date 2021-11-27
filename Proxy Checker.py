@@ -25,6 +25,7 @@ class Interface(threading.Thread):
         buttons.pack(side=TOP)
         def openProxy():
             Proxies().openProxy()
+            messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
             proxyList.config(state=NORMAL)
             proxyList.delete(0,END)
             for line in proxy:
