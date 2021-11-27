@@ -25,12 +25,13 @@ class Interface(threading.Thread):
         buttons.pack(side=TOP)
         def openProxy():
             Proxies().openProxy()
-            messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
-            proxyList.config(state=NORMAL)
-            proxyList.delete(0,END)
-            for line in proxy:
-                proxyList.insert(END,str(line))
-            proxyList.config(state=DISABLED)
+            if len(proxy) >=1:
+                messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
+                proxyList.config(state=NORMAL)
+                proxyList.delete(0,END)
+                for line in proxy:
+                    proxyList.insert(END,str(line))
+                proxyList.config(state=DISABLED)
         proxyOpenButton = Button(buttons,width=15,height=2,text='Wczytaj proxy',command=openProxy)
         proxyOpenButton.pack()
         def startCheck():
