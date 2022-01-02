@@ -31,7 +31,6 @@ class Interface(threading.Thread):
                 for line in proxy:
                     proxyList.insert(END,str(line))
                 proxyList.config(state=DISABLED)
-                messagebox.showinfo('Proxy Checker','Wczytano '+str(len(proxy))+' proxy.')
         proxyOpenButton = Button(buttons,width=15,height=2,text='Wczytaj proxy',command=openProxy)
         proxyOpenButton.pack()
         def startCheck():
@@ -95,10 +94,10 @@ class Check(threading.Thread):
         proxy_ = proxy
         headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'pl',
             'accept-charset': 'utf-8',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36',
-            'Referer': 'https://onet.pl',
         }
         i = x = 0
         l2.config(text=i)
@@ -107,15 +106,10 @@ class Check(threading.Thread):
             try:
                 proxies = {
                     'http': 'http://'+line,
-                    'https': 'http://'+line
+                    'https': 'http://'+line,
                 }
-                w= requests.Session()
-                w.proxies=proxies
-                w.headers=headers
-                w.verify=False
-                s = w.get('https://onet.pl',timeout=5,allow_redirects=False)
+                s = requests.get(url='https://onet.pl',timeout=5,proxies=proxies,headers=headers)
                 print(s.status_code)
-                w.close()
                 i+=1
                 l2.config(text=i)
                 goods.append(line)
